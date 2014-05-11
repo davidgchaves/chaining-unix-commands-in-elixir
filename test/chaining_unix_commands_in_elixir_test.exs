@@ -17,4 +17,19 @@ defmodule ChainingUnixCommandsInElixirTest do
 
     assert Unix.fake_ps_ax == output
   end
+
+  test "'grep(input, to_match)' returns the 'input lines' that match 'to_match' regex" do
+    input = """
+    foo
+    bar
+    result 1
+    baz
+    1 result found
+    quax
+    """
+    expected_output = ["result 1", "1 result found"]
+    to_match = ~r/result/
+
+    assert Unix.grep(input, to_match)  == expected_output
+  end
 end

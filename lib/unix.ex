@@ -13,4 +13,9 @@ defmodule Unix do
       216 ttys001    0:00.19 -zsh
     """
   end
+
+  def grep(input, to_match) do
+    splitted_lines = String.split input, "\n"
+    Enum.filter splitted_lines, fn(line) -> Regex.match? to_match, line end
+  end
 end
