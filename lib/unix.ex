@@ -1,8 +1,6 @@
-defmodule ChainingUnixCommandsInElixirTest do
-  use ExUnit.Case
-
-  test "'fake_ps_ax' outputs some processes" do
-    output = """
+defmodule Unix do
+  def fake_ps_ax do
+    """
       PID TTY           TIME CMD
       451 ??         0:00.07 /Library/DropboxHelperTools/Dropbox_u501/dbfseventsd
       489 ??         0:00.02 com.apple.audio.SandboxHelper
@@ -14,7 +12,5 @@ defmodule ChainingUnixCommandsInElixirTest do
       644 ttys000    0:00.00 ps -ax
       216 ttys001    0:00.19 -zsh
     """
-
-    assert Unix.fake_ps_ax == output
   end
 end
