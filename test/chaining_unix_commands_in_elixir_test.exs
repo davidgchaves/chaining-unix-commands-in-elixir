@@ -32,4 +32,11 @@ defmodule ChainingUnixCommandsInElixirTest do
 
     assert Unix.grep(input, to_match)  == expected_output
   end
+
+  test "'awk(input, 1) splits 'input' on whitespace and returns the 1st column" do
+    input = ["foo bar", "  baz  qux "]
+    expected_output = ["foo", "baz"]
+
+    assert Unix.awk(input, 1) == expected_output
+  end
 end

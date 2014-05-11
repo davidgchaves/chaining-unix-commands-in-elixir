@@ -18,4 +18,12 @@ defmodule Unix do
     splitted_lines = String.split input, "\n"
     Enum.filter splitted_lines, fn(line) -> Regex.match? to_match, line end
   end
+
+  def awk(input, column) do
+    Enum.map input, fn(line) ->
+      stripped_line = String.strip line
+      columns = Regex.split ~r/ /, stripped_line, trim: true
+      Enum.at columns, column - 1
+    end
+  end
 end
