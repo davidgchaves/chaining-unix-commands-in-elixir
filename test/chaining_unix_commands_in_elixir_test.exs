@@ -39,4 +39,9 @@ defmodule ChainingUnixCommandsInElixirTest do
 
     assert Unix.awk(input, 1) == expected_output
   end
+
+  test "pipelining 'fake_ps_ax', 'grep' and 'awk' works like in Unix" do
+    match_zsh = ~r/zsh/
+    assert (Unix.fake_ps_ax |> Unix.grep(match_zsh) |> Unix.awk 1) == ["209", "216"]
+  end
 end
