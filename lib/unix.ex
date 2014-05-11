@@ -15,15 +15,19 @@ defmodule Unix do
   end
 
   def grep(input, to_match) do
-    splitted_lines = String.split input, "\n"
-    Enum.filter splitted_lines, fn(line) -> Regex.match? to_match, line end
+    String.split(input, "\n")
+      |>  Enum.filter fn(line) -> Regex.match?(to_match, line) end
   end
 
   def awk(input, column) do
     Enum.map input, fn(line) ->
-      stripped_line = String.strip line
-      columns = Regex.split ~r/ /, stripped_line, trim: true
-      Enum.at columns, column - 1
+      String.strip(line)
+        |> regex_split(~r/ /)
+        |> Enum.at(column - 1)
     end
+  end
+
+  defp regex_split(line, regex) do
+    Regex.split regex, line, trim: true
   end
 end
